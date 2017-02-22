@@ -101,7 +101,7 @@ public class TokenAuthenticationService {
             ObjectMapper mapper = new ObjectMapper();
             JWTPayload jwt = mapper.readValue(subject, JWTPayload.class);
 
-            return new AuthenticatedUser(jwt.getUsername(), jwt.get, jwt.getNome(), jwt.getEmail(), jwt.getIdUsuario(), jwt.getAuthorities());
+            return new AuthenticatedUser(jwt.getUsername(), "", jwt.getNome(), jwt.getEmail(), jwt.getIdUsuario(), jwt.getAuthorities());
 
         } catch (IOException e) {
             e.printStackTrace();

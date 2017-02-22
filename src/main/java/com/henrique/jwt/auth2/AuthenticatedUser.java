@@ -12,31 +12,21 @@ import java.util.List;
  */
 public class AuthenticatedUser implements Authentication {
 
-    private String username;
-    private String password;
-    private String nome;
-    private String email;
-    private String idUsuario;
-    private List<GrantedAuthority> authorities;
-    private boolean isAuthenticated;
+    private String name;
+    private boolean authenticated = true;
 
-    public AuthenticatedUser(String username, String password, String nome, String email, String idUsuario, List<GrantedAuthority> authorities) {
-        this.username = username;
-        this.password = password;
-        this.nome = nome;
-        this.email = email;
-        this.idUsuario = idUsuario;
-        this.authorities = authorities;
+    AuthenticatedUser(String name){
+        this.name = name;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return null;
     }
 
     @Override
     public Object getCredentials() {
-        return this.password;
+        return null;
     }
 
     @Override
@@ -46,35 +36,21 @@ public class AuthenticatedUser implements Authentication {
 
     @Override
     public Object getPrincipal() {
-        return this.username;
+        return null;
     }
 
     @Override
     public boolean isAuthenticated() {
-        return isAuthenticated;
+        return this.authenticated;
     }
 
     @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        this.isAuthenticated = isAuthenticated;
+    public void setAuthenticated(boolean b) throws IllegalArgumentException {
+        this.authenticated = b;
     }
 
     @Override
     public String getName() {
-        return this.nome;
+        return this.name;
     }
-
-
-    public JWTPayload buildPayload() {
-        JWTPayload payload = new JWTPayload();
-        payload.setNome(this.nome);
-        payload.setEmail(this.email);
-        payload.setAuthorities(this.authorities);
-        payload.setIdUsuario(this.idUsuario);
-        payload.setUsername(this.email);
-        return payload;
-    }
-
-
 }
-
